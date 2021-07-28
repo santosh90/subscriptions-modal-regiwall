@@ -42,7 +42,7 @@
             .meter-modal mark {
               background-color: {{highlight-background-color}};
               text-decoration: line-through;
-              color: #000;
+              color: {{highlight-color}};
             }
             
            
@@ -107,7 +107,7 @@
               display: inline-block;
               width: 100%;
               text-align: left;
-              margin: 10px auto 5px;
+              margin: 25px auto 5px;
             }
 
             .da-offer input{
@@ -776,6 +776,7 @@ screen and (max-width: 600px) {
     float: left;
     width: 47.5%;
     margin: 0 14px 25px 0;
+    height: 70px;
    }
    #regiwall-overlay .da-offer label.error {
     color: #ff0000;
@@ -872,6 +873,8 @@ screen and (max-width: 600px) {
           </div>
         
         </div>
+       
+        <!--script src="http://code.jquery.com/jquery-1.11.3.min.js"></script---->
         <script>
           // Close paywall
           function closePaywall() {
@@ -912,23 +915,75 @@ screen and (max-width: 600px) {
           }
         })();
         function validateEmail(mail) {
-          console.log("EMail "+mail+""+ (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)))
-          return (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+          var mailValidatorRegex=/\S+@\S+\.\S+/;
+          ////console.log("EMail "+mail+""+ (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)))
+          return (mailValidatorRegex.test(mail))
         }
         function validatePassword(password) {
-          var passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
-          return (passwordRegex.test(password))
+          ///var passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
+          var passwordRegex=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,}$/;
+          var uppercaseRegex=/[A-Z]/;
+          var lowerCaseRegex=/[a-z]/;
+          var numberCaseReg=/[0-9]/;
+          var specialCharReg=/[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/;
+          console.log('uppercaseRegex',uppercaseRegex.test(password),numberCaseReg.test(password));
+          if(password=='')
+          {
+            jQuery("#password-error").text("Password is required");
+            return false;
+          }else if(password!='' && password.length<=5)
+          {
+            jQuery("#password-error").text("Your password must be at least 5 characters long");
+            return false;
+          }else if(!uppercaseRegex.test(password))
+          {
+            jQuery("#password-error").text("Your password must contain a uppercase letter");
+            return false;
+          }else if(!lowerCaseRegex.test(password))
+          {
+            jQuery("#password-error").text("Your password must contain a lowercase letter");
+            return false;
+          }else if(!numberCaseReg.test(password))
+          {
+            jQuery("#password-error").text("Your password must contain a number");
+            return false;
+          }else if(!specialCharReg.test(password))
+          {
+            jQuery("#password-error").text("Your password must contain a special characters");
+            return false;
+          }else
+          {
+            jQuery("#password-error").text("");
+            ///jQuery("#password-error").text("Your password must contain a uppercase letter");
+            return true;
+          }
+          ///return (passwordRegex.test(password))
         }
         function validateZipcode(zip) {
-          console.log("Zip "+zip+""+ (/^[0-9]{5,}$/.test(zip)));
-          return (/^[0-9]{5,}$/.test(zip));
+          ////console.log("Zip "+zip+""+ (/^[0-9]{5,}$/.test(zip)));
+          var zipCodeRegex=/^[0-9]{5,}$/;
+          if(zip=='')
+          {
+            jQuery("#zip-error").text("Zip code is required");
+            return false;
+          }else if(!zipCodeRegex.test(zip))
+          {
+            jQuery("#zip-error").text("Zip code is invalid");
+            return false;
+          }else
+          {
+            jQuery("#zip-error").text("");
+            return true;
+          }
+          ///return (zipCodeRegex.test(zip));
         }
         var validateInputs = function() {
-          console.log("Validate Input");
+          
           var emailElement = jQuery("#regiwallEmailId");
           var passwordElement = jQuery("#regiwallPasswordId");
           var zipcodeElement = jQuery("#regiwallZipCodeId");
-          console.log("Validate Input Blur event" + emailElement.val() + passwordElement.val() + zipcodeElement.val());
+          console.log("Validate Input",validatePassword(passwordElement.val()));
+          ///console.log("Validate Input Blur event" + emailElement.val() + passwordElement.val() + zipcodeElement.val());
           validateEmail(emailElement.val()) ? jQuery(emailElement).removeClass("error") : jQuery(emailElement).addClass("error");
           validateEmail(emailElement.val()) ? jQuery("#email-error").removeClass("error") : jQuery("#email-error").addClass("error");
           validatePassword(passwordElement.val()) ? jQuery(passwordElement).removeClass("error") : jQuery(passwordElement).addClass("error");
@@ -937,7 +992,7 @@ screen and (max-width: 600px) {
           validateZipcode(zipcodeElement.val()) ? jQuery("#zip-error").removeClass("error") : jQuery("#zip-error").addClass("error");
           jQuery(".regiwall-error").empty();
         }
-        jQuery(".regiwall-input").keypress(function() {
+        jQuery(".regiwall-input").keyup(function() {
           ///alert('working');
           ///console.log("Validate Input Blur event");
           validateInputs();
@@ -946,17 +1001,17 @@ screen and (max-width: 600px) {
           console.log("Validate Input Blur event");
           validateInputs();
         })
-        jQuery(".regiwall-input").keyup().focus(function(event) {
-          if(event.target.id=="regiwallEmailId" && jQuery(event.target).hasClass("error")){
-            jQuery(".regiwall-error").append("<li>Please enter a valid email address</li>")
-          }
-          if(event.target.id=="regiwallPasswordId" && jQuery(event.target).hasClass("error")){
-            jQuery(".regiwall-error").append("<li>Please create a password with min 6 chars and at least 1 letter and 1 number</li>")
-          }
-          if(event.target.id=="regiwallZipCodeId" && jQuery(event.target).hasClass("error")){
-            jQuery(".regiwall-error").append("<li>Please enter a valid zip or postal code</li>")
-          }
-        })
+        // jQuery(".regiwall-input").keyup().focus(function(event) {
+        //   if(event.target.id=="regiwallEmailId" && jQuery(event.target).hasClass("error")){
+        //     jQuery(".regiwall-error").append("<li>Please enter a valid email address</li>")
+        //   }
+        //   if(event.target.id=="regiwallPasswordId" && jQuery(event.target).hasClass("error")){
+        //     jQuery(".regiwall-error").append("<li>Please create a password with min 6 chars and at least 1 letter and 1 number</li>")
+        //   }
+        //   if(event.target.id=="regiwallZipCodeId" && jQuery(event.target).hasClass("error")){
+        //     jQuery(".regiwall-error").append("<li>Please enter a valid zip or postal code</li>")
+        //   }
+        // })
         jQuery("#regiwallSubButtonId").click(function(event){
           var email= jQuery("#regiwallEmailId").val();
           var password= jQuery("#regiwallPasswordId").val();

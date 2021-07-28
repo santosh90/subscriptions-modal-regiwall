@@ -874,7 +874,7 @@ screen and (max-width: 600px) {
         
         </div>
        
-        <!--script src="http://code.jquery.com/jquery-1.11.3.min.js"></script---->
+        <!----script src="http://code.jquery.com/jquery-1.11.3.min.js"></script----->
         <script>
           // Close paywall
           function closePaywall() {
@@ -915,41 +915,30 @@ screen and (max-width: 600px) {
           }
         })();
         function validateEmail(mail) {
-          var mailValidatorRegex=/\S+@\S+\.\S+/;
+          var mailValidatorRegex=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           ////console.log("EMail "+mail+""+ (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)))
           return (mailValidatorRegex.test(mail))
         }
         function validatePassword(password) {
           ///var passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
           var passwordRegex=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,}$/;
-          var uppercaseRegex=/[A-Z]/;
-          var lowerCaseRegex=/[a-z]/;
+          var alphacharacterRegex=/[A-Za-z]/;
           var numberCaseReg=/[0-9]/;
-          var specialCharReg=/[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/;
-          console.log('uppercaseRegex',uppercaseRegex.test(password),numberCaseReg.test(password));
           if(password=='')
           {
             jQuery("#password-error").text("Password is required");
             return false;
-          }else if(password!='' && password.length<=5)
+          }else if(password!='' && password.length<=6)
           {
-            jQuery("#password-error").text("Your password must be at least 5 characters long");
+            jQuery("#password-error").text("Your password must be at least 6 characters long");
             return false;
-          }else if(!uppercaseRegex.test(password))
+          }else if(!alphacharacterRegex.test(password))
           {
-            jQuery("#password-error").text("Your password must contain a uppercase letter");
-            return false;
-          }else if(!lowerCaseRegex.test(password))
-          {
-            jQuery("#password-error").text("Your password must contain a lowercase letter");
+            jQuery("#password-error").text("Your password must contain a letter");
             return false;
           }else if(!numberCaseReg.test(password))
           {
             jQuery("#password-error").text("Your password must contain a number");
-            return false;
-          }else if(!specialCharReg.test(password))
-          {
-            jQuery("#password-error").text("Your password must contain a special characters");
             return false;
           }else
           {

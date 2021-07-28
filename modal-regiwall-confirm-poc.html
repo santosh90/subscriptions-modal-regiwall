@@ -1,0 +1,1052 @@
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap');
+            .reg-dialog * {
+              box-sizing:inherit;
+            }
+            h1, h2, h3, h4, h5, h6{
+              font-family: Georgia, Times, 'Times New Roman', serif;
+            }
+            #regiwall-overlay {
+              background: rgba(0,0,0,.5);
+              height: 100%;
+              position: fixed;
+              width: 100%;
+              z-index: 2147483642;
+              top: 0;
+              left: 0;
+              overflow-x: hidden;
+              overflow-y: auto;
+              display: block;
+              contain: strict;
+            }
+            
+            #regiwall-overlay:after {
+              content: "";
+              height: 100%;
+            }
+            
+            #regiwall-overlay:after, .reg-dialog {
+              display: inline-block;
+              vertical-align: middle;  
+            }
+            
+            #regiwall-overlay, .panel .reg-explain, .panel .reg-register, .panel .reg-sso, .panel .reg-tos {
+              text-align:center;
+            }
+            
+            /* TEMPORARY - hide close button */
+            .meter-modal .reg-close {
+              display: none;
+            }
+            
+            .meter-modal mark {
+              background-color: {{highlight-background-color}};
+              text-decoration: line-through;
+              color: {{highlight-color}};
+            }
+            
+           
+            
+            .meter-modal {
+              width: 100%;
+              max-width:718px;
+              margin: 0 auto;
+              box-shadow: 0 0 20px rgba(0,0,0,.15);
+              background:#5ba8f1;
+              font-family: 'Lato', Arial, Helvetica, sans-serif;
+            }
+              
+            .meter-modal[data-variation="B"] .da-bubble-4 {
+              display:none;  
+            }
+            
+            .meter-modal h2,
+            .meter-modal h3 {
+              letter-spacing: normal;
+            }
+            
+            
+            
+            .meter-modal .reg-content {
+              padding: 0 !important;
+            }
+            
+            .meter-modal span {
+              font-size: 14px;
+              text-transform: uppercase;
+            }
+            
+            .pull-left {
+              float: left;
+            }
+            
+            .pull-right {
+              float: right;
+            }
+            
+            .pw-row {
+              display: block;
+              padding: 18px 32px;
+              margin: 0 auto;
+              /* background-color: #2f2f76; */
+              text-align: left;
+            }
+            
+            .da-body {
+              display: block;
+              background-color: #fff;
+              height: auto !important;
+              text-align: left;
+              color: #fff;
+              padding: 15px 32px 15px;
+              clear: both;
+            
+            }
+            
+            .da-offer {
+              display: inline-block;
+              width: 100%;
+              text-align: left;
+              margin: 10px auto 5px;
+            }
+
+            .da-offer input{
+              font-size:16px;
+              color:#434343;
+              border:1px solid #acacac;
+              outline:none;
+              padding: 18px 0;
+              margin: 0 0 12px;
+              width: 100%;
+              text-indent: 25px;
+              display: inline-block;
+              font-family: 'Lato', Arial, Helvetica, sans-serif;
+            }
+            .da-offer input:focus{
+              border:1px solid #666;
+            }
+            .da-offer input[type="password"]{
+              margin-right:0;
+              float:right;
+            }
+
+           
+            .meter-modal .fine-print {
+              color: #999;
+              font-weight: normal;
+              font-size: 11px;
+              text-transform: none;
+              padding: 12px 0 0;
+              display:block;
+            }
+            
+            .da-cta-div {
+              margin: 0 0 0;
+            }
+            
+            .access-list {
+              display: none;
+              clear: both;
+            }
+            
+            .access-list span { /* text above bubbles */
+              color: #636363;
+              width: 100%;
+              display: block;
+              position: relative;
+              text-align:center;
+              font-size: 16px;
+            }
+            .access-list span:before, .access-list span:after{
+              content:"";
+              height:0;
+              width:45%;
+              position:absolute;
+              top:8px;
+              left:0;
+              border-bottom:2px solid #d7d7d7;
+            }
+            .access-list span:after{
+              left:auto;
+              right:0;
+            }
+
+            .access-list>div {
+              display: inline-block;
+              margin: 20px 0 24px;
+              width: 98px;
+            }
+            
+            
+            
+            .access-list img {
+              width: 65px;
+              height: 65px;
+              border: 0;
+            }
+            
+            .access-list>div p, .access-list>div p span { /* bubble text */
+              font-size: 11px;
+              line-height: 13px;
+              text-transform: uppercase;
+              margin: 2px 0 0;
+              color: #000;
+            }
+            
+            
+            .da-digital-button {
+              color: #fff;
+              background-color: #134c82;
+              outline:none;
+              border: none;
+              width:280px;
+              font-family: 'Lato', Arial, Helvetica, sans-serif;
+              cursor:pointer;
+            }
+            
+            .da-head {
+              /* background-color: #5ba8f1; */
+            }
+            
+            .pw-btn {
+              padding: 11px 0; 
+              display: inline-block;
+              font-weight: 700;
+              font-size: 14px;
+              color: #ffffff;
+              text-align: center;
+              text-decoration: none;
+              text-transform: uppercase;
+              border-radius: 100px;
+              
+            }
+            
+            .pw-btn.lrg {
+              min-width: 320px;
+              height: 30%;
+            }
+            
+            .pw-btn.small {
+              font-size: 12.5px;
+              padding: 9px 0;
+              color: #5ba8f1;
+              background-color: #f1f1f1;
+              min-width: 95px;
+            }
+            
+            .pw-btn.small.print-link {
+              background-color:#fff;
+              color:#000;
+            }
+            
+            .pw-row>div {
+              display: inline-block
+            }
+            
+            .pw-row span {
+              line-height:1;
+              color: #fff;
+              font-weight: bold;
+            }
+            
+            
+            
+            .pw-text.bottom span { /* print text */
+              color: #000;
+            }
+            
+            .pw-row.da-footer { /* print footer */
+              background-color: #dfdfe0;
+            }
+            
+            .da-login-link, .da-logout-link, .da-print-link {
+              float: right;
+              margin-top: -7px;
+            }
+            
+            .da-body h2 { /* tagline */
+              font-size: 31px;
+              line-height:41px;
+              letter-spacing:-0.5px;
+              font-weight: normal;
+              color: #000000;
+              margin: 10px 0 15px;
+              
+            }
+            
+            .da-urgency { /* urgency */
+              color: #000000;
+              font-size: 16px;
+              line-height:24px;
+              font-weight: normal;
+              margin:0;
+              letter-spacing: normal;
+            }
+            
+            .da-sign-in {
+              text-align: center;
+              margin: 16px 0 0;
+            }
+            
+            .da-sign-in a.nothanks {
+              display: block;
+              clear:both;
+              font-size:18px;
+              font-style:italic;
+              text-decoration:underline;
+              color: #134c82;
+              margin: 15px 0 0;
+              font-family: Georgia, Times, 'Times New Roman', serif;
+            }
+            
+            [data-reg-loggedin] .da-login-link {
+              visibility: hidden;
+              display:none!important;
+            }
+              
+            .da-logout-link {
+              visibility: hidden;
+              display:none!important;
+            }
+            
+            [data-reg-loggedin] .da-logout-link {
+              visibility: visible;
+              display:block!important;
+            }
+
+            .close{
+              font-size: 20px;
+              color:#7c7c7c;
+              cursor:pointer;
+              float:right;
+            }
+            
+            .google{
+              background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='100' height='100' viewBox='0 0 48 48'%3E%3Cdefs%3E%3Cpath id='a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/defs%3E%3CclipPath id='b'%3E%3Cuse xlink:href='%23a' overflow='visible'/%3E%3C/clipPath%3E%3Cpath clip-path='url(%23b)' fill='%23FBBC05' d='M0 37V11l17 13z'/%3E%3Cpath clip-path='url(%23b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/%3E%3C/svg%3E") no-repeat 22px center;
+            }
+            .facebook{
+              background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 14222 14222'%3E%3Ccircle cx='7111' cy='7112' r='7111' fill='%231977f3'/%3E%3Cpath d='M9879 9168l315-2056H8222V5778c0-562 275-1111 1159-1111h897V2917s-814-139-1592-139c-1624 0-2686 984-2686 2767v1567H4194v2056h1806v4969c362 57 733 86 1111 86s749-30 1111-86V9168z' fill='%23fff'/%3E%3C/svg%3E") no-repeat 10px center ;
+              margin-left:20px;
+            }
+            .google, .facebook{
+              display: none;
+              width:255px;
+              border:2px solid #c6c6c6;
+              background-size:30px;
+              color:#333;
+              font-size:19px;
+              text-decoration:none;
+              padding: 16px 0 16px 15px;
+              border-radius:8px;
+              font-family: Arial, Helvetica, sans-serif;
+            }
+            
+            @media only screen and (max-device-width:600px),
+			screen and (max-width: 600px) {
+        
+              .pw-row.da-head{
+                width:calc(100% - 64px);
+                padding:14px 32px;
+                margin:0 auto;
+                display: inline-flex;
+                align-items: center;
+              }
+              .pw-row>div{
+                display:inline-block;
+                width:50%;
+              }
+              .pw-row>div>a{
+                float:right;
+              }
+              .da-login-link, .da-logout-link, .da-print-link{
+                margin:0;
+              }
+
+              .pw-row span{
+                line-height: .8;
+              }
+
+
+              .da-body {padding: 15px 0 20px;}
+              .close {padding:0 20px 0 0;}
+              .da-body h2 { 
+                line-height:36px;
+                margin: 50px 30px ;
+              }
+              .da-urgency{margin: 0 30px ;}
+              .pw-text{
+                max-width: 55%;
+              }
+              
+              .da-offer{
+                display:block;
+                margin: 12px 30px 22px;
+                width:auto;
+              }
+              .da-offer input[type='password']{
+                width:100%;
+              }
+              .da-offer input{
+                margin-bottom:20px;
+              }
+              .da-digital-button{
+                float:none;
+                margin:0 auto;
+                display:block;
+                width:100%;
+              }
+              .access-list span:before, .access-list span:after{
+                width:42%;
+              }
+              .da-sign-in{
+                margin:30px 0 0;
+              }
+              .google, .facebook{
+                margin: 0 auto 15px;
+              }
+              .da-sign-in a.nothanks{
+                margin: 22px 0 0;
+              }
+              .meter-modal .fine-print{
+                padding:40px 30px 0;
+                text-align:center;
+              }
+              .m_show, .toggle {display:block !important;}
+
+              #regiwall-overlay:after {
+                display: none !important;
+              }
+            
+            }
+            
+            @media only screen and (max-device-width:360px),
+            screen and (max-width: 360px) {
+              .meter-modal span{
+                font-size: 12px;
+              }
+              .pw-btn.small {
+                font-size: 11px;
+                min-width: 90px;
+              }
+            }
+            .da-legal {
+              background-color: #333;
+              text-align: center;
+              color: #eee;
+              font-size: 11px;
+              padding: 18px 0;
+            }
+            
+            .da-legal a {
+              display: inline-block;
+              color: #eee;
+              text-decoration: none;
+              margin: 0 3px;
+            }
+            .regiwall-error li {
+              color : red;
+            }
+            .regiwall-input.error {
+              background-image: url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='%23D80000' d='M0 0h40v40H0z'/%3E%3Ccircle cx='16' cy='16' r='16' transform='translate%284 4%29'/%3E%3Cpath fill='%23fff' d='M20 13.4c1.2 0 2.4.3 3.4 1s2 1.4 2.5 2.4 1 2.2 1 3.5-.3 2.4-1 3.4-1.4 2-2.5 2.5-2.2 1-3.4 1a6.8 6.8 0 0 1-6.9-7c0-1.2.3-2.3 1-3.4s1.4-1.8 2.5-2.5 2.2-.9 3.4-.9zm1.1 11.2v-1.9l-.2-.1h-2v2.2h2.2v-.2zm0-3.1l.2-5.6-.1-.1h-2.4v5.7l.2.1.2.1H21l.1-.2z'/%3E%3C/g%3E%3C/svg%3E);
+              background-position: right;
+              background-repeat: no-repeat;
+              background-size: 40px 40px;
+              border: 1px solid #d80000 !important;
+              /* padding-right: 45px; */
+            }
+
+  .regiwall-confirm  .meter-modal .reg-close {
+      display: none;
+    }
+   
+  .regiwall-confirm .meter-modal mark {
+     background-color: {{highlight-background-color}};
+     text-decoration: line-through;
+     color: {{highlight-color}};
+   }
+   
+  
+   
+  .regiwall-confirm .meter-modal {
+     width: 100%;
+     max-width:718px;
+     margin: 0 auto;
+     box-shadow: 0 0 20px #666;
+     font-family: 'Lato', Arial, Helvetica, sans-serif;
+   }
+     
+  .regiwall-confirm  .meter-modal[data-variation="B"] .da-bubble-4 {
+     display:none;  
+   }
+   
+  .regiwall-confirm .meter-modal h2,
+   .meter-modal h3 {
+     letter-spacing: normal;
+   }
+   
+   
+   
+  .regiwall-confirm .meter-modal .reg-content {
+     padding: 0 !important;
+   }
+   
+  .regiwall-confirm  .meter-modal span {
+     font-size: 14px;
+     text-transform: uppercase;
+   }
+   
+  .regiwall-confirm .pull-left {
+     float: left;
+   }
+   
+  .regiwall-confirm .pull-right {
+     float: right;
+   }
+   
+  .regiwall-confirm .pw-row {
+     display: block;
+     padding: 14px 32px 10px;
+     margin: 0 auto;
+     background-color: #2f2f76;
+     text-align: left;
+   }
+   
+  .regiwall-confirm .da-body {
+     display: block;
+     background-color: #134c82;
+     height: auto !important;
+     text-align: left;
+     color: #fff;
+     padding: 0;
+     clear: both;
+   
+   }
+  .regiwall-confirm .da-top{
+       background-color: #e2f0f6;
+       padding: 12px 22px 30px 32px;
+   }
+  .regiwall-confirm  .da-offer {
+     text-align: left;
+     padding: 85px 32px 0;
+   }
+
+  .regiwall-confirm .da-offer input{
+     font-size:16px;
+     color:#434343;
+     border:1px solid #acacac;
+     outline:none;
+     padding: 18px 0;
+     margin: 0 0 12px;
+     width: 100%;
+     text-indent: 25px;
+     display: inline-block;
+     font-family: 'Lato', Arial, Helvetica, sans-serif;
+   }
+  .regiwall-confirm .da-offer input:focus{
+     border:1px solid #666;
+   }
+  .regiwall-confirm .da-offer input[type="password"]{
+     width: 350px;
+   }
+
+  .regiwall-confirm .meter-modal .fine-print {
+     color: #999;
+     font-weight: normal;
+     font-size: 11px;
+     text-transform: none;
+     padding: 12px 0 0;
+     display:block;
+   }
+   
+  .regiwall-confirm .da-cta-div {
+     margin: 0 0 0;
+   }
+   
+  .regiwall-confirm .access-list {
+     display: block;
+     clear: both;
+   }
+   
+  .regiwall-confirm .access-list span { /* text above bubbles */
+     color: #636363;
+     width: 100%;
+     display: block;
+     position: relative;
+     text-align:center;
+     font-size: 16px;
+   }
+  .regiwall-confirm .access-list span:before, .access-list span:after{
+     content:"";
+     height:0;
+     width:45%;
+     position:absolute;
+     top:8px;
+     left:0;
+     border-bottom:2px solid #d7d7d7;
+   }
+  .regiwall-confirm .access-list span:after{
+     left:auto;
+     right:0;
+   }
+
+  .regiwall-confirm .access-list>div {
+     display: inline-block;
+     margin: 20px 0 24px;
+     width: 98px;
+   }
+   
+   
+   
+  .regiwall-confirm .access-list img {
+     width: 65px;
+     height: 65px;
+     border: 0;
+   }
+   
+  .regiwall-confirm .access-list>div p, .access-list>div p span { /* bubble text */
+     font-size: 11px;
+     line-height: 13px;
+     text-transform: uppercase;
+     margin: 2px 0 0;
+     color: #000;
+   }
+   
+   
+  .regiwall-confirm .da-digital-button {
+     color: #fff;
+     background-color: #ff4d00;
+     outline:none;
+     border: none;
+     width:192px;
+     font-family: 'Lato', Arial, Helvetica, sans-serif;
+     cursor:pointer;
+   }
+   
+  .regiwall-confirm .da-head {
+     background-color: #5ba8f1;
+   }
+   
+  .regiwall-confirm .pw-btn {
+     padding: 20px 0;
+     display: inline-block;
+     font-weight: 700;
+     font-size: 14px;
+     color: #ffffff;
+     text-align: center;
+     text-decoration: none;
+     text-transform: uppercase;
+     border-radius: 100px;
+     
+   }
+   
+
+   
+  .regiwall-confirm .pw-btn.small {
+     font-size: 12.5px;
+     padding: 9px 0;
+     color: #5ba8f1;
+     background-color: #f1f1f1;
+     min-width: 95px;
+   }
+   
+  .regiwall-confirm .pw-btn.small.print-link {
+     background-color:#fff;
+     color:#000;
+   }
+   
+  .regiwall-confirm .pw-row>div {
+     display: inline-block
+   }
+   
+  .regiwall-confirm .pw-row span {
+     line-height:35px;
+     color: #fff;
+     font-weight: bold;
+   }
+   
+   
+   
+  .regiwall-confirm .pw-text.bottom span { /* print text */
+     color: #000;
+   }
+   
+  .regiwall-confirm .pw-row.da-footer { /* print footer */
+     background-color: #dfdfe0;
+   }
+   
+  .regiwall-confirm .da-login-link, .da-logout-link, .da-print-link {
+     float: right;
+   }
+  .regiwall-confirm .da-body h1 { 
+     font-size: 30px;
+     line-height:34px;
+     letter-spacing:-0.5px;
+     color: #fff;
+     margin: 0 0 22px;
+     
+   }
+  .regiwall-confirm .da-body h2 { 
+     font-size: 23px;
+     line-height:34px;
+     letter-spacing:-0.5px;
+     font-weight: normal;
+     color: #134c82;
+     margin: 0 0 2px;
+     
+   }
+  .regiwall-confirm .da-body h2:first-of-type{
+       margin-top: 32px;
+   }
+   
+  .regiwall-confirm .da-urgency { /* urgency */
+     color: #e2f0f6;
+     font-size: 18px;
+     line-height:24px;
+     font-weight: normal;
+     margin:0;
+     padding: 30px 32px 0;
+     letter-spacing: normal;
+   }
+   
+  .regiwall-confirm .da-sign-in {
+     text-align: left;
+      padding: 110px 40px 42px;
+   }
+   
+  .regiwall-confirm .da-sign-in a.nothanks {
+     
+     clear:both;
+     font-size:18px;
+     font-style:italic;
+     text-decoration:underline;
+     color: #fff;
+     margin: 0 0 0;
+     font-family: Georgia, Times, 'Times New Roman', serif;
+   }
+   
+  .regiwall-confirm .pw-row > .da-logout-link {
+     visibility: hidden;
+     display:none;
+   }
+   
+  .regiwall-confirm .close{
+     font-size: 20px;
+     color:#7c7c7c;
+     cursor:pointer;
+     float:right;
+   }
+   
+   
+   
+   @media only screen and (max-device-width:600px),
+screen and (max-width: 600px) {
+      .regiwall-confirm .meter-modal{
+       height: 100vh;
+      }
+    .regiwall-confirm .da-top {
+       padding-bottom: 22px ;
+      }  
+     .regiwall-confirm .da-body h1 { 
+       font-size: 26px;
+      }
+      .regiwall-confirm .da-body h2 { 
+       line-height: 25px;
+      }
+      .regiwall-confirm .da-body h2:first-of-type{
+         margin-top:25px;
+         margin-bottom:8px;
+      }
+      .regiwall-confirm .da-urgency{
+       padding-top: 22px;
+      }
+      .regiwall-confirm .da-offer{
+       padding-top:50px ;
+      }
+      .regiwall-confirm .da-sign-in{
+       padding-top: 80px;
+      }
+    
+      .regiwall-confirm .m_show, .toggle {display:block !important;}
+      .hide {display:none !important;}
+   
+   }
+   /*Santosh Changes*/
+   .da-offer div {
+    position: relative;
+    float: left;
+    width: 47.5%;
+    margin: 0 14px 25px 0;
+   }
+   #regiwall-overlay .da-offer label.error {
+    color: #ff0000;
+    clear: both;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: -18px;
+    left: 0;
+}
+
+   </style>
+    <div id="regiwall-overlay">
+      
+      <div class="reg-dialog meter-modal regiwall" data-market="{{market-domain}}">
+        <div class="pw-row da-head">
+          
+          <div class="pw-text">
+            <span class="da-progress" data-break="">{{progress-text}}</span>
+          </div>
+          <div class="da-login-link">
+            <a class="pw-btn small" data-reg-handler="signInHandler" href="#">Log in</a>
+          </div>
+          <div class="da-logout-link">
+            <a class="pw-btn small" data-reg-handler="logoutin" href="#">Log Out</a>
+          </div>
+        </div>
+        <div class="da-body">
+
+          <!-- <div class="close" onclick="closePaywall()">X</div> -->
+          
+          <h2 data-break=""><em>{{text-line-one}}</em> <br> <strong>{{text-line-two}}</strong></h2>
+
+          <h4 class="da-urgency">
+            <em>You'll get:</em><br>
+            <strong>&bull; {{text-bullet-one}}</strong><br>
+            <strong>&bull; {{text-bullet-two}}</strong><br>
+            <strong>&bull; {{text-bullet-three}}</strong>
+          </h4>
+
+          <div class="da-offer">
+              <div>
+                <input type="email" id="regiwallEmailId" name="email" class="regiwall-input" placeholder="EMAIL ADDRESS">
+                <label id="email-error" for="email">Please enter a valid email address</label>
+              </div>
+              <div>  
+               <input type="password" name="password" id="regiwallPasswordId" class="regiwall-input" placeholder="CREATE PASSWORD">
+               <label id="password-error" for="password">Password is required</label>
+              </div>
+              <div>
+               <input type="zip" name="zipCode" id="regiwallZipCodeId" class="regiwall-input" placeholder="ZIP CODE" maxlength="5">
+               <label id="zip-error" for="zip">Zip code is required</label>
+              </div>
+              <button class="da-digital-button pw-btn lrg pull-right" id="regiwallSubButtonId" data-met-return="">register &amp; continue</button>
+            </div>
+         
+          <!-- <div class="access-list">
+            <span>or</span>
+          </div>
+          <div class="da-sign-in">
+            <a href="{{url-google}}" class="reg-provider google" data-provider-id="2">Sign in with Google</a>
+            <a href="{{url-facebook}}" class="btn facebook">Sign in with Facebook</a>
+           </div> -->
+          <span class="fine-print">By creating an account you agree to receive email <br class="m_show" style="display:none;" /> communications from {{market-name}} </span>
+        </div>
+        <div class="da-legal">
+          <a class="reg-cancel abandon" href="{{abandon-url}}">Go to Homepage</a> | <a href="https://www.tribpub.com/central-terms-of-service/" target="_blank">Terms of Service</a> | <a href="https://www.tribpub.com/privacy-policy/" target="_blank">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="reg-dialog meter-modal regiwall-confirm" data-market="">
+              
+        <div class="da-body">
+
+          <div class="da-top">
+              <div class="close closeRegiwallConfirm">X</div>
+              <h2><strong>{{copy-line-one}}</strong></h2>
+              <h2><em>{{copy-line-two}}</em></h2>
+          </div>
+          
+
+          <h4 class="da-urgency">
+            {{copy-line-three}} <br class="hide" /> {{copy-line-four}}
+          </h4>
+
+          <div class="da-offer">
+              <h1>{{{copy-line-five-offer}}}</h1>
+              <a class="da-digital-button pw-btn lrg" href="https://preprod.subscription.mcall-stage.trbdevcloud.com/?regiwall" data-met-return>save now</a>
+          </div>
+         
+         
+          <div class="da-sign-in">
+            <a href="javascript:void(0);" class="nothanks closeRegiwallConfirm">Continue reading</a>
+          </div>
+        
+        </div>
+       
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script>
+          // Close paywall
+          function closePaywall() {
+            var x = document.getElementById("regiwall-overlay");
+            x.style.display = "none";
+          }
+          
+          //  Add linebreaks for mobile
+          var break_code = '<br class="m_show" style="display:none;">';
+          document.querySelectorAll('.meter-modal [data-break]').forEach(function(elem) {
+            //  insert `break_code` after `data-break`
+            var b = elem.getAttribute('data-break');
+            if(b != '')
+              elem.innerHTML = elem.innerHTML.replace(new RegExp(b, 'ig'), b + break_code);
+          });
+        </script>
+      </div>
+      <script>
+        // Close paywall
+        function closePaywall() {
+          var x = document.getElementById("regiwall-overlay");
+          x.style.display = "none";
+        }
+        //  Add linebreaks for mobile
+        var break_code = '<br class="m_show" style="display:none;">';
+        document.querySelectorAll('.meter-modal [data-break]').forEach(function(elem) {
+          //  insert `break_code` after `data-break`
+          var b = elem.getAttribute('data-break');
+          if(b != '')
+            elem.innerHTML = elem.innerHTML.replace(new RegExp(b, 'ig'), b + break_code);
+        });
+        (() => {
+          let bodyElem = document.querySelector("body");
+          if(bodyElem){
+            let paywallModal = document.querySelector("#regiwall-overlay");
+            document.querySelector("body").appendChild(paywallModal);
+            jQuery(".regiwall-confirm").hide();
+          }
+        })();
+        function validateEmail(mail) {
+          console.log("EMail "+mail+""+ (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)))
+          return (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+        }
+        function validatePassword(password) {
+          var passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
+          return (passwordRegex.test(password))
+        }
+        function validateZipcode(zip) {
+          console.log("Zip "+zip+""+ (/^[0-9]{5,}$/.test(zip)));
+          return (/^[0-9]{5,}$/.test(zip));
+        }
+        var validateInputs = function() {
+          console.log("Validate Input");
+          var emailElement = jQuery("#regiwallEmailId");
+          var passwordElement = jQuery("#regiwallPasswordId");
+          var zipcodeElement = jQuery("#regiwallZipCodeId");
+          console.log("Validate Input Blur event" + emailElement.val() + passwordElement.val() + zipcodeElement.val());
+          validateEmail(emailElement.val()) ? jQuery(emailElement).removeClass("error") : jQuery(emailElement).addClass("error");
+          validateEmail(emailElement.val()) ? jQuery("#email-error").removeClass("error") : jQuery("#email-error").addClass("error");
+          validatePassword(passwordElement.val()) ? jQuery(passwordElement).removeClass("error") : jQuery(passwordElement).addClass("error");
+          validatePassword(passwordElement.val()) ? jQuery("#password-error").removeClass("error") : jQuery("#password-error").addClass("error");
+          validateZipcode(zipcodeElement.val()) ? jQuery(zipcodeElement).removeClass("error") : jQuery(zipcodeElement).addClass("error");
+          validateZipcode(zipcodeElement.val()) ? jQuery("#zip-error").removeClass("error") : jQuery("#zip-error").addClass("error");
+          jQuery(".regiwall-error").empty();
+        }
+        jQuery(".regiwall-input").keypress(function() {
+          ///alert('working');
+          ///console.log("Validate Input Blur event");
+          validateInputs();
+        })
+        jQuery(".regiwall-input").change(function() {
+          console.log("Validate Input Blur event");
+          validateInputs();
+        })
+        jQuery(".regiwall-input").keyup().focus(function(event) {
+          if(event.target.id=="regiwallEmailId" && jQuery(event.target).hasClass("error")){
+            jQuery(".regiwall-error").append("<li>Please enter a valid email address</li>")
+          }
+          if(event.target.id=="regiwallPasswordId" && jQuery(event.target).hasClass("error")){
+            jQuery(".regiwall-error").append("<li>Please create a password with min 6 chars and at least 1 letter and 1 number</li>")
+          }
+          if(event.target.id=="regiwallZipCodeId" && jQuery(event.target).hasClass("error")){
+            jQuery(".regiwall-error").append("<li>Please enter a valid zip or postal code</li>")
+          }
+        })
+        jQuery("#regiwallSubButtonId").click(function(event){
+          var email= jQuery("#regiwallEmailId").val();
+          var password= jQuery("#regiwallPasswordId").val();
+          var zipcode = jQuery("#regiwallZipCodeId").val();
+          validateInputs();
+          console.log("email:  "+email +"   password:  "+password );
+          // if(jQuery(".regiwall-input.error").length) {
+          //     jQuery(".regiwall-input.error :first").focus();
+          //     return;
+          // }
+          var ssorURL = window.location.protocol + "//tribune.ssor.stage.trbdevcloud.com/registration";
+          var url = ssorURL+ "/trbsecurity/isocreatenewaccount/cors?product_code="+trb.registration.config.get('productCode');
+          jQuery.ajax({
+            "url": url,
+            "data": {
+                "product_code": trb.registration.config.get('productCode'),
+                "master_id": "",
+                "stateless": true,
+                "username": "",
+                "email": email,
+                "verifyEmail": email,
+                "password": password,
+                "verifyPassword": password,
+                "zipCode" : zipcode
+            },
+            "type": "POST",
+            success:function(res){
+             console.log(res);
+             var successToken = res.successToken;
+             var master_id = res.masterId;
+             var data = {
+              master_id : res.masterId,
+              tos : true,
+              zipCode : zipcode,
+              api_key :  res.successToken,
+              landingPage : "default",
+              product_code : trb.registration.config.get('productCode')
+             }
+             jQuery.ajax({
+              "url" : ssorURL +"/trbsecurity/consumerprofile/jsonp/save",
+              "data" : data,
+              "type":"GET",
+              dataType : "jsonp",
+              success:function(response){
+                console.log(response);
+                //jQuery("#regiwall-overlay").remove();
+                if(dataLayer) {
+                  dataLayer.push(
+                   {
+                     'event' : "registration wall registration",
+                     'platform' : "email"
+                   }
+                 )
+                }
+                trb.registration.utils.cache('trb.registration.userData', response.profileResponse);
+                jQuery(".regiwall").hide();
+                
+                
+                // trb.registration.manager.showWelcomeDialog(!(trb.registration.config.get('showWelcomeModal') == 'true'));
+                trb.registration.manager._load(function() {
+                  trb.registration.events.next('reg_after_login', function() {});
+                  trb.registration.user.setMasterId(response.masterId);
+                  trb.registration.user.setPUID("_");
+                  trb.registration.manager.user.getInfo();
+                  trb.registration.manager.user.setInfo(response.profileResponse, function() {
+                    trb.registration.ajax.setServersideLoginCookie(response.masterId,"_");
+                    console.log("loggedIn");
+                    jQuery(".regiwall-confirm").show();
+                  })
+                  jQuery(".closeRegiwallConfirm").click(function() {
+                    jQuery("#regiwall-overlay").remove();
+                    window.location.reload();
+                  })
+                })
+
+              },
+              error:function(err){
+                console.log(err);
+              }
+             })
+
+            },
+            error: function(error){
+              console.log(error)
+            }
+          })
+          event.preventDefault();
+          return false;
+        })
+      </script>
+    </div>
